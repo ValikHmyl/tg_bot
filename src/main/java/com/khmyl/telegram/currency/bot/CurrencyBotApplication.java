@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CurrencyBotApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CurrencyBotApplication.class, args);
-	}
-	@GetMapping("/")
-		String home() {
-		return "Hello World!";
-	}
+   public static void main(String[] args) {
+      SpringApplication.run(CurrencyBotApplication.class, args);
+   }
+
+   @GetMapping("/")
+   public String home() {
+      return "Hello World!";
+   }
 }

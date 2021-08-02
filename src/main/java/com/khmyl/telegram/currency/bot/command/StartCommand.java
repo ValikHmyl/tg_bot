@@ -43,7 +43,7 @@ public class StartCommand implements Command {
    private final Message message;
 
    //to props
-   //   private static final LocalTime DEFAULT_TIME = LocalTime.of(12,0);
+   private static final LocalTime DEFAULT_TIME = LocalTime.of(10, 0);
 
    @Autowired
    private SubscriberService subscriberService;
@@ -94,13 +94,13 @@ public class StartCommand implements Command {
    }
 
    private Trigger getTrigger(JobDetail jobDetail) {
-      LocalTime time = LocalTime.now().plusMinutes(1);
+      LocalTime time = DEFAULT_TIME;
       return TriggerBuilder.newTrigger()
                            .forJob(jobDetail)
                            .withIdentity(TriggerKey.triggerKey(jobDetail.getKey().getName(), "RatesToSubTrigger"))
                            .startNow()
-//                           .withSchedule(CronScheduleBuilder.dailyAtHourAndMinute(time.getHour(), time.getMinute()))
-                           .withSchedule(CronScheduleBuilder.cronSchedule("0 "+ time.getMinute() +" */2 ? * * *"))
+                           .withSchedule(CronScheduleBuilder.dailyAtHourAndMinute(time.getHour(), time.getMinute()))
+//                           .withSchedule(CronScheduleBuilder.cronSchedule("0 "+ time.getMinute() +" */2 ? * * *"))
                            .build();
    }
 
