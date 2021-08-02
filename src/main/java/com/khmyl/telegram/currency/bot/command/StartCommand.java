@@ -43,7 +43,7 @@ public class StartCommand implements Command {
    private final Message message;
 
    //to props
-   private static final LocalTime DEFAULT_TIME = LocalTime.of(10, 0);
+   private static final LocalTime DEFAULT_TIME = LocalTime.of(7, 0);
 
    @Autowired
    private SubscriberService subscriberService;
