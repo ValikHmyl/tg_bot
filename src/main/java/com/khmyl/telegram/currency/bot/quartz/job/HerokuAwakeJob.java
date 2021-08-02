@@ -14,8 +14,8 @@ public class HerokuAwakeJob {
    @Value("${app_name}")
    private String appName;
 
-   @Scheduled(cron = "* */20 * ? * *")
-   public void execute() throws JobExecutionException {
+   @Scheduled(cron = "0 */20 * ? * *")
+   public void execute() {
       WebClient.create()
                .get()
                .uri(uriBuilder -> uriBuilder.scheme("http").host("{appName}.herokuapp.com").build(appName))
