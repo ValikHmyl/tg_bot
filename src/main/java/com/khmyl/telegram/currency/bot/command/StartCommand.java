@@ -40,7 +40,7 @@ public class StartCommand implements Command {
 
    private final Message message;
 
-   @Value("${bot.default_publish_time:07:00}")
+   @Value("#{T(java.time.LocalTime).parse('${bot.default_publish_time}', T(java.time.format.DateTimeFormatter).ofPattern('HH:mm'))}")
    private LocalTime defaultTime;
 
    @Autowired
