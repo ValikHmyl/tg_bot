@@ -27,6 +27,9 @@ public class HerokuAwakeJob implements Job {
    @Value("${app_name}")
    private String appName;
 
+   @Value("${bot.heroku.awake.cron}")
+   private String awakeJobCronExpression;
+
    @Autowired
    private Scheduler scheduler;
 
@@ -44,19 +47,18 @@ public class HerokuAwakeJob implements Job {
    @EventListener
    public void onApplicationEvent(ContextRefreshedEvent event) {
       JobKey jobKey = JobKey.jobKey(this.getClass().getSimpleName(), "Heroku");
-      if (!scheduler.checkExists(jobKey)) {
-         JobDetail jobDetail = JobBuilder.newJob(this.getClass())
-                                         .storeDurably()
-                                         .withIdentity(jobKey)
-                                         .build();
-         CronTrigger trigger = TriggerBuilder.newTrigger()
-                                             .forJob(jobDetail)
-                                             .withIdentity(TriggerKey.triggerKey(jobDetail.getKey().getName(), "Heroku"))
-                                             .startNow()
-                                             .withSchedule(CronScheduleBuilder.cronSchedule("0 */20 * ? * *"))
-                                             .build();
-         scheduler.scheduleJob(jobDetail, trigger);
-      }
+      scheduler.deleteJob(jobKey);
+      JobDetail jobDetail = JobBuilder.newJob(this.getClass())
+                                      .storeDurably()
+                                      .withIdentity(jobKey)
+                                      .build();
+      CronTrigger trigger = TriggerBuilder.newTrigger()
+                                          .forJob(jobDetail)
+                                          .withIdentity(TriggerKey.triggerKey(jobDetail.getKey().getName(), "Heroku"))
+                                          .startNow()
+                                          .withSchedule(CronScheduleBuilder.cronSchedule(awakeJobCronExpression))
+                                          .build();
+      scheduler.scheduleJob(jobDetail, trigger);
    }
 
 }
