@@ -7,19 +7,17 @@ import com.khmyl.telegram.currency.bot.service.subs.SubscriberService;
 import com.khmyl.telegram.currency.bot.text.message.TextMessageProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.quartz.CronExpression;
 import org.quartz.CronScheduleBuilder;
-import org.quartz.CronTrigger;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
-import org.quartz.SimpleScheduleBuilder;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
@@ -42,8 +40,8 @@ public class StartCommand implements Command {
 
    private final Message message;
 
-   //to props
-   private static final LocalTime DEFAULT_TIME = LocalTime.of(7, 0);
+   @Value("${bot.default_publish_time:07:00}")
+   private LocalTime defaultTime;
 
    @Autowired
    private SubscriberService subscriberService;
@@ -94,12 +92,11 @@ public class StartCommand implements Command {
    }
 
    private Trigger getTrigger(JobDetail jobDetail) {
-      LocalTime time = DEFAULT_TIME;
       return TriggerBuilder.newTrigger()
                            .forJob(jobDetail)
                            .withIdentity(TriggerKey.triggerKey(jobDetail.getKey().getName(), "RatesToSubTrigger"))
                            .startNow()
-                           .withSchedule(CronScheduleBuilder.dailyAtHourAndMinute(time.getHour(), time.getMinute()))
+                           .withSchedule(CronScheduleBuilder.dailyAtHourAndMinute(defaultTime.getHour(), defaultTime.getMinute()))
 //                           .withSchedule(CronScheduleBuilder.cronSchedule("0 "+ time.getMinute() +" */2 ? * * *"))
                            .build();
    }
