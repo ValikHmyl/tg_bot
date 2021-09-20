@@ -14,6 +14,4 @@ public interface SubscriberService {
    Optional<SubscriberDto> getById(Long id);
 
    void remove(Long id);
-
-   boolean exist(Long id);
 }

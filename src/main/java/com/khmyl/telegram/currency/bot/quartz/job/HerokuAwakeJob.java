@@ -34,7 +34,7 @@ public class HerokuAwakeJob implements Job {
    private Scheduler scheduler;
 
    @Override
-   public void execute(JobExecutionContext context) throws JobExecutionException {
+   public void execute(JobExecutionContext context)  {
       WebClient.create()
                .get()
                .uri(uriBuilder -> uriBuilder.scheme("http").host("{appName}.herokuapp.com").build(appName))
@@ -54,7 +54,7 @@ public class HerokuAwakeJob implements Job {
                                       .build();
       CronTrigger trigger = TriggerBuilder.newTrigger()
                                           .forJob(jobDetail)
-                                          .withIdentity(TriggerKey.triggerKey(jobDetail.getKey().getName(), "Heroku"))
+                                          .withIdentity(TriggerKey.triggerKey(jobKey.getName(), jobKey.getGroup()))
                                           .startNow()
                                           .withSchedule(CronScheduleBuilder.cronSchedule(awakeJobCronExpression))
                                           .build();

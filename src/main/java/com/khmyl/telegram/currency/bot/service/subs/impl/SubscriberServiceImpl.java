@@ -18,7 +18,9 @@ public class SubscriberServiceImpl implements SubscriberService {
 
    @Override
    public void add(SubscriberDto dto) {
-      subscriberRepository.save(SubscriberConverter.convert(dto));
+      if (subscriberRepository.existsById(dto.getId())) {
+         subscriberRepository.save(SubscriberConverter.convert(dto));
+      }
    }
 
    @Override
@@ -36,8 +38,4 @@ public class SubscriberServiceImpl implements SubscriberService {
       subscriberRepository.deleteById(id);
    }
 
-   @Override
-   public boolean exist(Long id) {
-      return subscriberRepository.existsById(id);
-   }
 }
