@@ -26,14 +26,14 @@ public class SubscriberScheduler {
    private LocalTime defaultTime;
 
    @Autowired
-   private Scheduler quartzScheduler;
+   private Scheduler scheduler;
 
    public void scheduleRatesJob(SubscriberDto subscriber) {
       try {
          JobDetail jobDetail = getJobDetails(subscriber);
-         if (!quartzScheduler.checkExists(jobDetail.getKey())) {
+         if (!scheduler.checkExists(jobDetail.getKey())) {
             Trigger trigger = getTrigger(jobDetail);
-            quartzScheduler.scheduleJob(jobDetail, trigger);
+            scheduler.scheduleJob(jobDetail, trigger);
          }
       } catch (SchedulerException e) {
          log.error("Error during scheduling the job", e);
