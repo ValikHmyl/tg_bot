@@ -19,6 +19,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMar
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
+import static com.khmyl.telegram.currency.bot.text.message.TextMessageConstants.START_COMMAND_MESSAGE_KEY;
 import static org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE;
 
 @Slf4j
@@ -36,7 +37,7 @@ public class StartCommand implements Command {
    private SubscriberService subscriberService;
 
    @Autowired
-   private TextMessageProvider<SubscriberDto> welcomeTextMessageProvider;
+   private TextMessageProvider textMessageProvider;
 
    @Override
    public SendMessage execute() {
@@ -54,7 +55,7 @@ public class StartCommand implements Command {
    private SendMessage getResponse(SubscriberDto subscriber) {
       return SendMessage.builder()
                         .chatId(subscriber.getChatId().toString())
-                        .text(welcomeTextMessageProvider.getTextMessage(subscriber))
+                        .text(textMessageProvider.getTextMessage(START_COMMAND_MESSAGE_KEY, subscriber))
                         .parseMode(ParseMode.HTML)
                         .replyMarkup(getKeyboard())
                         .build();

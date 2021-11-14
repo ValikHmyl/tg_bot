@@ -1,7 +1,6 @@
-package com.khmyl.telegram.currency.bot;
+package com.khmyl.telegram.currency.bot.repository;
 
 import com.khmyl.telegram.currency.bot.model.entity.Subscriber;
-import com.khmyl.telegram.currency.bot.repository.SubscriberRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

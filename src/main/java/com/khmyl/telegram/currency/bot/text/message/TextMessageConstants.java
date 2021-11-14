@@ -1,0 +1,22 @@
+package com.khmyl.telegram.currency.bot.text.message;
+
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class TextMessageConstants {
+
+   public static final String GET_RATE_COMMAND_MESSAGE_KEY = "message.key.get_rate.command";
+   public static final String START_COMMAND_MESSAGE_KEY = "message.key.start.command";
+
+   public static final String DATE_TIME_KEY = "{date_time}";
+   public static final String SOURCE_AMOUNT_KEY = "{source_amount}";
+   public static final String SOURCE_CURRENCY_KEY = "{source_currency}";
+   public static final String TARGET_AMOUNT_KEY = "{target_amount}";
+   public static final String TARGET_CURRENCY_KEY = "{target_currency}";
+   public static final String NAME_KEY = "{name}";
+
+
+
+
+}

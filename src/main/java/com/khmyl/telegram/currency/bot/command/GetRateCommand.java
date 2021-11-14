@@ -14,6 +14,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 import java.time.LocalDate;
 
+import static com.khmyl.telegram.currency.bot.text.message.TextMessageConstants.GET_RATE_COMMAND_MESSAGE_KEY;
 import static org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE;
 
 @Slf4j
@@ -30,14 +31,14 @@ public class GetRateCommand implements Command {
    private CurrencyRateService currencyRateService;
 
    @Autowired
-   private TextMessageProvider<ExchangeRate> exchangeRateTextMessageProvider;
+   private TextMessageProvider textMessageProvider;
 
    @Override
    public SendMessage execute() {
       ExchangeRate exchangeRate = currencyRateService.getRate(currency.getCode(), date);
       return SendMessage.builder()
                         .chatId(chatId.toString())
-                        .text(exchangeRateTextMessageProvider.getTextMessage(exchangeRate))
+                        .text(textMessageProvider.getTextMessage(GET_RATE_COMMAND_MESSAGE_KEY, exchangeRate))
                         .parseMode(ParseMode.HTML)
                         .build();
    }

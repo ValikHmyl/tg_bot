@@ -1,6 +1,6 @@
 package com.khmyl.telegram.currency.bot.text.message;
 
-public interface TextMessageProvider<T> {
+public interface TextMessageProvider {
 
-   String getTextMessage(T t);
+   String getTextMessage(String messageKey, Object ... args);
 }
