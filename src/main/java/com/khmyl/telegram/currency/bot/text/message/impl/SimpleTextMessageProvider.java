@@ -13,7 +13,7 @@ public class SimpleTextMessageProvider implements TextMessageProvider {
    private TemplateResolver templateResolver;
 
    @Autowired
-   private BeanMessageTemplateFactory messageTemplateFactory;
+   private MessageTemplateByKeyFactory messageTemplateFactory;
 
    @Override
    public String getTextMessage(String messageKey, Object... args) {

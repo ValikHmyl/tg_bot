@@ -6,7 +6,7 @@ import com.khmyl.telegram.currency.bot.util.BeanUtil;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BeanMessageTemplateFactory implements MessageTemplateFactory {
+public class MessageTemplateByKeyFactory implements MessageTemplateFactory {
 
    @Override
    public MessageTemplate getTemplate(String key, Object... args) {
