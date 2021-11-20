@@ -38,7 +38,8 @@ public class GetRateMessageTemplate implements MessageTemplate {
    }
 
    @Override
-   public String getMessage() {//to properties and localize?
+   public String getMessage() {
+      //to properties and localize?
       return "On {date_time} NBRB rate is <b>{target_amount} {target_currency} = {source_amount} {source_currency}</b>";
    }
 }

@@ -7,6 +7,7 @@ import com.khmyl.telegram.currency.bot.model.dto.Currency;
 import com.khmyl.telegram.currency.bot.model.dto.SubscriberDto;
 import com.khmyl.telegram.currency.bot.service.subs.SubscriberService;
 import com.khmyl.telegram.currency.bot.util.BeanUtil;
+import com.khmyl.telegram.currency.bot.util.TelegramSenderHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.bots.AbsSender;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.time.LocalDate;
 
@@ -37,6 +37,9 @@ public class SendRatesJob implements Job {
    @Autowired
    private CommandExecutor commandExecutor;
 
+   @Autowired
+   private TelegramSenderHelper telegramSenderHelper;
+
    @Override
    public void execute(JobExecutionContext context) throws JobExecutionException {
       long id = context.getJobDetail().getJobDataMap().getLongValue("sub_id");
@@ -45,7 +48,7 @@ public class SendRatesJob implements Job {
          Currency.getCurrenciesForRate().forEach(currency -> {
             Command getRateCommand = getCommand(subscriber, currency);
             BotApiMethod<Message> message = commandExecutor.executeCommand(getRateCommand);
-            sendMessage(message);
+            telegramSenderHelper.sendMessage(absSender, message);
          });
       });
    }
@@ -54,11 +57,4 @@ public class SendRatesJob implements Job {
       return BeanUtil.getBean(GetRateCommand.class, subscriber.getChatId(), currency, LocalDate.now());
    }
 
-   private void sendMessage(BotApiMethod<Message> message) {
-      try {
-         absSender.execute(message);
-      } catch (TelegramApiException e) {
-         log.error("Unexpected telegram error", e);
-      }
-   }
 }

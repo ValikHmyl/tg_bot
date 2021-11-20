@@ -3,6 +3,7 @@ package com.khmyl.telegram.currency.bot;
 import com.khmyl.telegram.currency.bot.command.Command;
 import com.khmyl.telegram.currency.bot.command.executor.CommandExecutor;
 import com.khmyl.telegram.currency.bot.command.factory.CommandFactory;
+import com.khmyl.telegram.currency.bot.util.TelegramSenderHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,6 +32,9 @@ public class CurrencyBot extends TelegramLongPollingBot {
    @Autowired
    private CommandFactory<Message> commandFactory;
 
+   @Autowired
+   private TelegramSenderHelper telegramSenderHelper;
+
    @Override
    public String getBotUsername() {
       return botName;
@@ -48,15 +52,8 @@ public class CurrencyBot extends TelegramLongPollingBot {
       if (Objects.nonNull(message)) {
          Command command = commandFactory.defineCommand(message);
          BotApiMethod<Message> responseMessage = commandExecutor.executeCommand(command);
-         sendMessage(responseMessage);
+         telegramSenderHelper.sendMessage(this, responseMessage);
       }
    }
 
-   private void sendMessage(BotApiMethod<Message> message) {
-      try {
-         execute(message);
-      } catch (TelegramApiException e) {
-         log.error("Unexpected telegram error", e);
-      }
-   }
 }
