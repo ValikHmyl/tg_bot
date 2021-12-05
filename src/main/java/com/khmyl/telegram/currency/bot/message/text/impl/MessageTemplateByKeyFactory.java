@@ -1,7 +1,7 @@
-package com.khmyl.telegram.currency.bot.text.message.impl;
+package com.khmyl.telegram.currency.bot.message.text.impl;
 
-import com.khmyl.telegram.currency.bot.text.message.MessageTemplate;
-import com.khmyl.telegram.currency.bot.text.message.MessageTemplateFactory;
+import com.khmyl.telegram.currency.bot.message.text.MessageTemplate;
+import com.khmyl.telegram.currency.bot.message.text.MessageTemplateFactory;
 import com.khmyl.telegram.currency.bot.util.BeanUtil;
 import org.springframework.stereotype.Component;
 

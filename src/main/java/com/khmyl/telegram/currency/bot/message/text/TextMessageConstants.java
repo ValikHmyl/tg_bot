@@ -1,4 +1,4 @@
-package com.khmyl.telegram.currency.bot.text.message;
+package com.khmyl.telegram.currency.bot.message.text;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

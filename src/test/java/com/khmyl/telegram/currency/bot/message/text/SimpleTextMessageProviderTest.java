@@ -1,8 +1,8 @@
-package com.khmyl.telegram.currency.bot.text.message;
+package com.khmyl.telegram.currency.bot.message.text;
 
+import com.khmyl.telegram.currency.bot.message.text.impl.SimpleTextMessageProvider;
 import com.khmyl.telegram.currency.bot.model.dto.NbrbExchangeRate;
 import com.khmyl.telegram.currency.bot.model.dto.SubscriberDto;
-import com.khmyl.telegram.currency.bot.text.message.impl.SimpleTextMessageProvider;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

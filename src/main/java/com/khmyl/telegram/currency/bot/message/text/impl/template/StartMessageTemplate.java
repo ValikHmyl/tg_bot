@@ -1,9 +1,8 @@
-package com.khmyl.telegram.currency.bot.text.message.impl.template;
+package com.khmyl.telegram.currency.bot.message.text.impl.template;
 
 import com.khmyl.telegram.currency.bot.model.dto.SubscriberDto;
-import com.khmyl.telegram.currency.bot.model.entity.Subscriber;
-import com.khmyl.telegram.currency.bot.text.message.MessageTemplate;
-import com.khmyl.telegram.currency.bot.text.message.TextMessageConstants;
+import com.khmyl.telegram.currency.bot.message.text.MessageTemplate;
+import com.khmyl.telegram.currency.bot.message.text.TextMessageConstants;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Scope;

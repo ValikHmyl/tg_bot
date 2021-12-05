@@ -1,8 +1,8 @@
-package com.khmyl.telegram.currency.bot.text.message.impl.template;
+package com.khmyl.telegram.currency.bot.message.text.impl.template;
 
+import com.khmyl.telegram.currency.bot.message.text.MessageTemplate;
 import com.khmyl.telegram.currency.bot.model.dto.ExchangeRate;
-import com.khmyl.telegram.currency.bot.text.message.MessageTemplate;
-import com.khmyl.telegram.currency.bot.text.message.TextMessageConstants;
+import com.khmyl.telegram.currency.bot.message.text.TextMessageConstants;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Scope;
@@ -14,11 +14,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 import static com.khmyl.telegram.currency.bot.model.dto.Currency.BYN;
-import static com.khmyl.telegram.currency.bot.text.message.TextMessageConstants.DATE_TIME_KEY;
-import static com.khmyl.telegram.currency.bot.text.message.TextMessageConstants.SOURCE_AMOUNT_KEY;
-import static com.khmyl.telegram.currency.bot.text.message.TextMessageConstants.SOURCE_CURRENCY_KEY;
-import static com.khmyl.telegram.currency.bot.text.message.TextMessageConstants.TARGET_AMOUNT_KEY;
-import static com.khmyl.telegram.currency.bot.text.message.TextMessageConstants.TARGET_CURRENCY_KEY;
+import static com.khmyl.telegram.currency.bot.message.text.TextMessageConstants.DATE_TIME_KEY;
+import static com.khmyl.telegram.currency.bot.message.text.TextMessageConstants.SOURCE_AMOUNT_KEY;
+import static com.khmyl.telegram.currency.bot.message.text.TextMessageConstants.SOURCE_CURRENCY_KEY;
+import static com.khmyl.telegram.currency.bot.message.text.TextMessageConstants.TARGET_AMOUNT_KEY;
+import static com.khmyl.telegram.currency.bot.message.text.TextMessageConstants.TARGET_CURRENCY_KEY;
 
 @Component(TextMessageConstants.GET_RATE_COMMAND_MESSAGE_KEY)
 @Scope("prototype")

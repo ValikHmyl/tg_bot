@@ -5,7 +5,7 @@ import com.khmyl.telegram.currency.bot.model.dto.Currency;
 import com.khmyl.telegram.currency.bot.model.dto.SubscriberDto;
 import com.khmyl.telegram.currency.bot.quartz.scheduler.SubscriberScheduler;
 import com.khmyl.telegram.currency.bot.service.subs.SubscriberService;
-import com.khmyl.telegram.currency.bot.text.message.TextMessageProvider;
+import com.khmyl.telegram.currency.bot.message.text.TextMessageProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMar
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
-import static com.khmyl.telegram.currency.bot.text.message.TextMessageConstants.START_COMMAND_MESSAGE_KEY;
+import static com.khmyl.telegram.currency.bot.message.text.TextMessageConstants.START_COMMAND_MESSAGE_KEY;
 import static org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE;
 
 @Slf4j
