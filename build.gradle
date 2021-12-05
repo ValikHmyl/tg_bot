@@ -23,14 +23,18 @@ dependencies {
 	implementation 'org.telegram:telegrambots-spring-boot-starter:5.2.0'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
 	implementation 'org.springframework.boot:spring-boot-starter-quartz'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'com.github.ben-manes.caffeine:caffeine'
 	runtimeOnly 'org.postgresql:postgresql'
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testRuntimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'com.squareup.okhttp3:okhttp'
+	testImplementation 'com.squareup.okhttp3:mockwebserver'
 }
 
 test {

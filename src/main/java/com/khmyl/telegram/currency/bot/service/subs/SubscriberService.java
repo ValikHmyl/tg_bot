@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface SubscriberService {
 
-   void add(SubscriberDto subscriber);
+   SubscriberDto add(SubscriberDto subscriber);
 
    List<SubscriberDto> getAll();
 

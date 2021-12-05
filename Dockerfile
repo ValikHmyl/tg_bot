@@ -8,7 +8,7 @@ RUN cd /usr/local/bin && wget https://services.gradle.org/distributions/gradle-7
 RUN mkdir -p /app
 COPY . /app
 WORKDIR /app
-RUN gradle build -x test
+RUN gradle build
 
 FROM adoptopenjdk/openjdk11:alpine-slim
 
