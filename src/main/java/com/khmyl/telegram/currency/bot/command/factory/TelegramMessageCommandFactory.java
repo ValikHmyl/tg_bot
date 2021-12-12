@@ -1,8 +1,8 @@
 package com.khmyl.telegram.currency.bot.command.factory;
 
 import com.khmyl.telegram.currency.bot.command.Command;
-import com.khmyl.telegram.currency.bot.command.GetRateCommand;
-import com.khmyl.telegram.currency.bot.command.StartCommand;
+import com.khmyl.telegram.currency.bot.command.impl.GetRateCommand;
+import com.khmyl.telegram.currency.bot.command.impl.StartCommand;
 import com.khmyl.telegram.currency.bot.model.dto.Currency;
 import com.khmyl.telegram.currency.bot.util.BeanUtil;
 import org.springframework.stereotype.Component;
@@ -35,7 +35,7 @@ public class TelegramMessageCommandFactory implements CommandFactory<Message> {
       if (commandsMapper.containsKey(command)) {
          return commandsMapper.get(command).apply(message);
       }
-      throw new IllegalArgumentException("Command not identified"); //add error command
+      throw new IllegalArgumentException("Command not identified");
    }
 
 }

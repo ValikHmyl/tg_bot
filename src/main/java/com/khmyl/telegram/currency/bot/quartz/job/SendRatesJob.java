@@ -1,7 +1,8 @@
 package com.khmyl.telegram.currency.bot.quartz.job;
 
 import com.khmyl.telegram.currency.bot.command.Command;
-import com.khmyl.telegram.currency.bot.command.GetRateCommand;
+import com.khmyl.telegram.currency.bot.command.impl.GetRateCommand;
+import com.khmyl.telegram.currency.bot.command.Response;
 import com.khmyl.telegram.currency.bot.command.executor.CommandExecutor;
 import com.khmyl.telegram.currency.bot.model.dto.Currency;
 import com.khmyl.telegram.currency.bot.model.dto.SubscriberDto;
@@ -15,8 +16,6 @@ import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 
 import java.time.LocalDate;
@@ -47,8 +46,8 @@ public class SendRatesJob implements Job {
          log.info("Execute Send Rates Job for " + subscriber.getName());
          Currency.getCurrenciesForRate().forEach(currency -> {
             Command getRateCommand = getCommand(subscriber, currency);
-            BotApiMethod<Message> message = commandExecutor.executeCommand(getRateCommand);
-            telegramSenderHelper.sendMessage(absSender, message);
+            Response message = commandExecutor.executeCommand(getRateCommand);
+            telegramSenderHelper.send(absSender, message);
          });
       });
    }

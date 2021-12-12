@@ -1,6 +1,7 @@
 package com.khmyl.telegram.currency.bot;
 
 import com.khmyl.telegram.currency.bot.command.Command;
+import com.khmyl.telegram.currency.bot.command.Response;
 import com.khmyl.telegram.currency.bot.command.executor.CommandExecutor;
 import com.khmyl.telegram.currency.bot.command.factory.CommandFactory;
 import com.khmyl.telegram.currency.bot.util.TelegramSenderHelper;
@@ -9,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.Objects;
 
@@ -51,8 +50,8 @@ public class CurrencyBot extends TelegramLongPollingBot {
       Message message = update.getMessage();
       if (Objects.nonNull(message)) {
          Command command = commandFactory.defineCommand(message);
-         BotApiMethod<Message> responseMessage = commandExecutor.executeCommand(command);
-         telegramSenderHelper.sendMessage(this, responseMessage);
+         Response responseMessage = commandExecutor.executeCommand(command);
+         telegramSenderHelper.send(this, responseMessage);
       }
    }
 

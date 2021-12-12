@@ -15,7 +15,7 @@ public enum Currency {
    USD("USD", 145L), EUR("EUR", 292L), RUB("RUB", 298L), BYN("BYN", -1L);
 
    private final String code;
-   private final Long id;
+   private final Long id;//todo remove?
 
    public static Currency ofCode(String code) {
       return Arrays.stream(Currency.values())

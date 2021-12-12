@@ -1,15 +1,18 @@
-package com.khmyl.telegram.currency.bot.command;
+package com.khmyl.telegram.currency.bot.command.impl;
 
+import com.khmyl.telegram.currency.bot.command.Command;
+import com.khmyl.telegram.currency.bot.command.Response;
+import com.khmyl.telegram.currency.bot.command.impl.decorator.MessageWithDefaultKeyboard;
+import com.khmyl.telegram.currency.bot.command.impl.response.MessageResponse;
+import com.khmyl.telegram.currency.bot.message.text.TextMessageProvider;
 import com.khmyl.telegram.currency.bot.model.dto.Currency;
 import com.khmyl.telegram.currency.bot.model.dto.ExchangeRate;
 import com.khmyl.telegram.currency.bot.service.currency.CurrencyRateService;
-import com.khmyl.telegram.currency.bot.message.text.TextMessageProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 import java.time.LocalDate;
@@ -34,12 +37,12 @@ public class GetRateCommand implements Command {
    private TextMessageProvider textMessageProvider;
 
    @Override
-   public SendMessage execute() {
+   public Response execute() {
       ExchangeRate exchangeRate = currencyRateService.getRate(currency.getCode(), date);
-      return SendMessage.builder()
-                        .chatId(chatId.toString())
-                        .text(textMessageProvider.getTextMessage(GET_RATE_COMMAND_MESSAGE_KEY, exchangeRate))
-                        .parseMode(ParseMode.HTML)
-                        .build();
+      SendMessage message = MessageWithDefaultKeyboard.toBuilder()
+                                                      .chatId(chatId.toString())
+                                                      .text(textMessageProvider.getTextMessage(GET_RATE_COMMAND_MESSAGE_KEY, exchangeRate))
+                                                      .build();
+      return MessageResponse.of(message);
    }
 }
