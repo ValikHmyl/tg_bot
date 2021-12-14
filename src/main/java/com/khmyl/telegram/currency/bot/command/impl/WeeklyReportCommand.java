@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.objects.File;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
+import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.io.FileInputStream;
 import java.nio.charset.StandardCharsets;
@@ -23,6 +24,8 @@ import static org.springframework.beans.factory.config.ConfigurableBeanFactory.S
 @Scope(SCOPE_PROTOTYPE)
 @RequiredArgsConstructor
 public class WeeklyReportCommand implements Command {
+
+   private final Message message;
 
    @SneakyThrows
    @Override

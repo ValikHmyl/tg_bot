@@ -27,7 +27,7 @@ public class TelegramMessageCommandFactory implements CommandFactory<Message> {
                                  message.getChatId(),
                                  currency,
                                  LocalDate.now())));
-         put("WR", message -> BeanUtil.getBean(WeeklyReportCommand.class));
+         put("WR", message -> BeanUtil.getBean(WeeklyReportCommand.class, message));
       }
    });
 
