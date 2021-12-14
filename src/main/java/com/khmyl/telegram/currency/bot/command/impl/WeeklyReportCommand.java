@@ -35,6 +35,6 @@ public class WeeklyReportCommand implements Command {
       // Writes a string to the above temporary file
       Files.write(tempFile, "test".getBytes(StandardCharsets.UTF_8));
 
-      return DocumentResponse.of(SendDocument.builder().document(new InputFile(tempFile.toFile())).caption("ss").build());
+      return DocumentResponse.of(SendDocument.builder().chatId(message.getChatId().toString()).document(new InputFile(tempFile.toFile())).caption("ss").build());
    }
 }
