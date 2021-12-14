@@ -14,6 +14,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.io.FileInputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,8 +31,9 @@ public class WeeklyReportCommand implements Command {
    @SneakyThrows
    @Override
    public Response execute() {
-      Path tempFile = Files.createTempFile(null, null);
+//      Path tempFile = Files.createTempFile(null, null);
 
+      Path tempFile = Files.createFile(Path.of("." + FileSystems.getDefault().getSeparator() + "test.txt"));
       // Writes a string to the above temporary file
       Files.write(tempFile, "test".getBytes(StandardCharsets.UTF_8));
 
