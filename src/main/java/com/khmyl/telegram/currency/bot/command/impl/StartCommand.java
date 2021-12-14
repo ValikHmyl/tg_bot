@@ -2,7 +2,7 @@ package com.khmyl.telegram.currency.bot.command.impl;
 
 import com.khmyl.telegram.currency.bot.command.Command;
 import com.khmyl.telegram.currency.bot.command.Response;
-import com.khmyl.telegram.currency.bot.command.impl.decorator.MessageWithDefaultKeyboard;
+import com.khmyl.telegram.currency.bot.command.impl.response.decorator.MessageWithDefaultKeyboard;
 import com.khmyl.telegram.currency.bot.command.impl.response.MessageResponse;
 import com.khmyl.telegram.currency.bot.converter.SubscriberConverter;
 import com.khmyl.telegram.currency.bot.message.text.TextMessageProvider;

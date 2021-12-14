@@ -1,4 +1,4 @@
-package com.khmyl.telegram.currency.bot.command.impl.decorator;
+package com.khmyl.telegram.currency.bot.command.impl.response.decorator;
 
 import com.khmyl.telegram.currency.bot.model.dto.Currency;
 import lombok.Builder;
@@ -24,6 +24,7 @@ public class MessageWithDefaultKeyboard extends SendMessage {
    public ReplyKeyboard getReplyMarkup() {
       KeyboardRow row = new KeyboardRow();
       Currency.getCurrenciesForRate().forEach(currency -> row.add(KeyboardButton.builder().text(currency.getCode()).build()));
+      row.add(KeyboardButton.builder().text("WR").build());
       return ReplyKeyboardMarkup.builder().keyboardRow(row).resizeKeyboard(true).build();
    }
 

@@ -3,6 +3,7 @@ package com.khmyl.telegram.currency.bot.command.factory;
 import com.khmyl.telegram.currency.bot.command.Command;
 import com.khmyl.telegram.currency.bot.command.impl.GetRateCommand;
 import com.khmyl.telegram.currency.bot.command.impl.StartCommand;
+import com.khmyl.telegram.currency.bot.command.impl.WeeklyReportCommand;
 import com.khmyl.telegram.currency.bot.model.dto.Currency;
 import com.khmyl.telegram.currency.bot.util.BeanUtil;
 import org.springframework.stereotype.Component;
@@ -26,6 +27,7 @@ public class TelegramMessageCommandFactory implements CommandFactory<Message> {
                                  message.getChatId(),
                                  currency,
                                  LocalDate.now())));
+         put("WR", message -> BeanUtil.getBean(WeeklyReportCommand.class));
       }
    });
 
