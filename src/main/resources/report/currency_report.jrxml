@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_1" pageWidth="1000" pageHeight="750" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="859d1972-8ab6-403b-bb09-58a6250d82ba">
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
+
+    <parameter name="max" class="java.lang.String"/>
+    <parameter name="min" class="java.lang.String"/>
+    <field name="date" class="java.time.LocalDate">
+        <fieldDescription><![CDATA[date]]></fieldDescription>
+    </field>
+    <field name="amount" class="java.lang.Integer">
+        <fieldDescription><![CDATA[amount]]></fieldDescription>
+    </field>
+    <field name="code" class="java.lang.String">
+        <fieldDescription><![CDATA[code]]></fieldDescription>
+    </field>
+    <field name="rate" class="java.math.BigDecimal">
+        <fieldDescription><![CDATA[rate]]></fieldDescription>
+    </field>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="10" splitType="Stretch"/>
+    </title>
+    <pageHeader>
+        <band height="10" splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="10" splitType="Stretch"/>
+    </columnHeader>
+    <summary>
+        <band height="650" splitType="Stretch">
+            <lineChart>
+                <chart evaluationTime="Report">
+                    <reportElement x="0" y="0" width="950" height="650" uuid="182444f8-c2ca-4560-a413-6ab9b3b5673e">
+                        <property name="net.sf.jasperreports.customizer.class.0" value="net.sf.jasperreports.customizers.axis.RangeAxisCustomizer"/>
+                        <propertyExpression name="net.sf.jasperreports.customizer.0.minValue"><![CDATA[$P{min}]]></propertyExpression>
+                        <propertyExpression name="net.sf.jasperreports.customizer.0.maxValue"><![CDATA[$P{max}]]></propertyExpression>
+                    </reportElement>
+                    <chartTitle/>
+                    <chartSubtitle/>
+                    <chartLegend/>
+                </chart>
+                <categoryDataset>
+                    <dataset resetType="Report"/>
+                    <categorySeries>
+                        <seriesExpression><![CDATA[$F{code}]]></seriesExpression>
+                        <categoryExpression><![CDATA[$F{date}]]></categoryExpression>
+                        <valueExpression><![CDATA[$F{rate}]]></valueExpression>
+                    </categorySeries>
+                </categoryDataset>
+                <linePlot>
+                    <plot/>
+                    <categoryAxisFormat>
+                        <axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+                    </categoryAxisFormat>
+                    <valueAxisFormat>
+                        <axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+                    </valueAxisFormat>
+                </linePlot>
+            </lineChart>
+        </band>
+    </summary>
+</jasperReport>
