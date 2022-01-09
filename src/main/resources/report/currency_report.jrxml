@@ -40,14 +40,14 @@
             <textField>
                 <reportElement x="240" y="10" width="480" height="30" uuid="00b7bf5b-fe3d-4ece-a209-3bf40cf4ea12"/>
                 <textElement>
-                    <font fontName="Arial" size="16"/>
+                    <font size="16"/>
                 </textElement>
                 <textFieldExpression><![CDATA["NBRB "+ $F{currency} +" " +$F{dateSpan}+":"]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="60" y="510" width="540" height="120" uuid="fd7c4494-6b12-4eaf-a4ba-8e34196eca2a"/>
                 <textElement>
-                    <font fontName="Arial" size="16"/>
+                    <font size="16"/>
                 </textElement>
                 <textFieldExpression><![CDATA["Max: " + $F{max}+"\nMin: "+ $F{min} +"\nAverage " + $F{avg}]]></textFieldExpression>
             </textField>
