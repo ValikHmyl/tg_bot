@@ -24,6 +24,7 @@ public class WebClientConfig {
    public static final int DEFAULT_TIMEOUT = 5000;
 
    @Bean
+   //todo
    public WebClient httpsNbrbWebClient() throws SSLException {
       SslContext context = SslContextBuilder.forClient()
               .trustManager(InsecureTrustManagerFactory.INSTANCE)

@@ -12,10 +12,9 @@ import java.util.stream.Collectors;
 @Getter
 public enum Currency {
 
-   USD("USD", 431L), EUR("EUR", 451L), RUB("RUB", 456L), BYN("BYN", -1L);
+   USD("USD"), EUR("EUR"), RUB("RUB"), BYN("BYN");
 
    private final String code;
-   private final Long id;//todo remove?
 
    public static Currency ofCode(String code) {
       return Arrays.stream(Currency.values())
@@ -25,6 +24,6 @@ public enum Currency {
    }
 
    public static List<Currency> getCurrenciesForRate() {
-      return Arrays.stream(Currency.values()).filter(currency -> currency.getId() > 0).collect(Collectors.toList());
+      return Arrays.stream(Currency.values()).filter(currency -> !currency.getCode().equals(BYN.getCode())).collect(Collectors.toList());
    }
 }

@@ -9,6 +9,8 @@ import org.eclipse.collections.impl.collector.BigDecimalSummaryStatistics;
 import org.eclipse.collections.impl.collector.Collectors2;
 import org.springframework.stereotype.Component;
 
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +31,7 @@ public class CurrencySummaryCalculatorImpl implements CurrencySummaryCalculator 
                                  .currency(rates.iterator().next().getCode())
                                  .max(summaryStatistics.getMax())
                                  .min(summaryStatistics.getMin())
-                                 .avg(summaryStatistics.getAverage())
+                                 .avg(summaryStatistics.getAverage(new MathContext(5, RoundingMode.HALF_EVEN)))
                                  .dateSpan(dateSpan)
                                  .build();
 
