@@ -47,8 +47,8 @@ public class CurrencyBot extends TelegramLongPollingBot {
    @Override
    public void onUpdateReceived(Update update) {
       log.info("Update " + update.getUpdateId());
-      Message message = update.getMessage();
-      if (Objects.nonNull(message)) {
+      if (update.hasMessage()) {
+         Message message = update.getMessage();
          Command command = commandFactory.defineCommand(message);
          Response responseMessage = commandExecutor.executeCommand(command);
          telegramSenderHelper.send(this, responseMessage);

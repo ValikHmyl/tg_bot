@@ -38,4 +38,15 @@ public class PdfReportService implements ReportService {
          throw new ReportException(ex);
       }
    }
+
+   @Override
+   public JasperReport compileSubReport(String subReportName) {
+      try {
+         InputStream stream = this.getClass().getResourceAsStream(subReportName);
+         return JasperCompileManager.compileReport(stream);
+      } catch (JRException ex) {
+         log.error("Error occurred while compiling subreport", ex);
+         throw new ReportException(ex);
+      }
+   }
 }

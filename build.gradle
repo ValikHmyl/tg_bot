@@ -32,6 +32,8 @@ dependencies {
 	implementation 'com.github.ben-manes.caffeine:caffeine'
 	implementation 'net.sf.jasperreports:jasperreports:6.18.1'
 	implementation 'net.sf.jasperreports:jasperreports-chart-customizers:6.18.1'
+	implementation 'org.eclipse.collections:eclipse-collections-api:11.0.0'
+	implementation 'org.eclipse.collections:eclipse-collections:11.0.0'
 
 	runtimeOnly 'org.postgresql:postgresql'
 

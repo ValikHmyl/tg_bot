@@ -8,6 +8,7 @@ public final class TextMessageConstants {
 
    public static final String GET_RATE_COMMAND_MESSAGE_KEY = "message.key.get_rate.command";
    public static final String START_COMMAND_MESSAGE_KEY = "message.key.start.command";
+   public static final String REPORT_CAPTION_KEY = "message.key.report.caption";
 
    public static final String DATE_TIME_KEY = "{date_time}";
    public static final String SOURCE_AMOUNT_KEY = "{source_amount}";

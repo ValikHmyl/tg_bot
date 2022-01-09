@@ -15,19 +15,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import static com.khmyl.telegram.currency.bot.command.Command.REPORT_COMMAND;
+import static com.khmyl.telegram.currency.bot.command.Command.START_COMMAND;
+
 @Component
 public class TelegramMessageCommandFactory implements CommandFactory<Message> {
 
    private final Map<String, Function<Message, Command>> commandsMapper = Collections.unmodifiableMap(new HashMap<>() {
       {
-         put("/start", message -> BeanUtil.getBean(StartCommand.class, message));
+         put(START_COMMAND, message -> BeanUtil.getBean(StartCommand.class, message));
          Currency.getCurrenciesForRate()
                  .forEach(currency -> put(currency.getCode(),
                          message -> BeanUtil.getBean(GetRateCommand.class,
                                  message.getChatId(),
                                  currency,
                                  LocalDate.now())));
-         put("WR", message -> BeanUtil.getBean(ReportCommand.class, message, 7));
+         put(REPORT_COMMAND, message -> BeanUtil.getBean(ReportCommand.class, message, 7));
       }
    });
 

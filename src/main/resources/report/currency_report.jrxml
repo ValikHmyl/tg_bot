@@ -1,65 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_1" pageWidth="1000" pageHeight="750" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="859d1972-8ab6-403b-bb09-58a6250d82ba">
-    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
-
-    <parameter name="max" class="java.lang.String"/>
-    <parameter name="min" class="java.lang.String"/>
-    <field name="date" class="java.time.LocalDate">
-        <fieldDescription><![CDATA[date]]></fieldDescription>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_1" pageWidth="1000" pageHeight="680" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="859d1972-8ab6-403b-bb09-58a6250d82ba">
+    <parameter name="SUB_REPORT" class="net.sf.jasperreports.engine.JasperReport"/>
+    <field name="rates" class="java.util.List">
+        <fieldDescription><![CDATA[rates]]></fieldDescription>
     </field>
-    <field name="amount" class="java.lang.Integer">
-        <fieldDescription><![CDATA[amount]]></fieldDescription>
+    <field name="max" class="java.math.BigDecimal">
+        <fieldDescription><![CDATA[max]]></fieldDescription>
     </field>
-    <field name="code" class="java.lang.String">
-        <fieldDescription><![CDATA[code]]></fieldDescription>
+    <field name="min" class="java.math.BigDecimal">
+        <fieldDescription><![CDATA[min]]></fieldDescription>
     </field>
-    <field name="rate" class="java.math.BigDecimal">
-        <fieldDescription><![CDATA[rate]]></fieldDescription>
+    <field name="avg" class="java.math.BigDecimal">
+        <fieldDescription><![CDATA[avg]]></fieldDescription>
+    </field>
+    <field name="currency" class="java.lang.String">
+        <fieldDescription><![CDATA[currency]]></fieldDescription>
+    </field>
+    <field name="dateSpan" class="com.khmyl.telegram.currency.bot.model.dto.LocalDateSpan">
+        <fieldDescription><![CDATA[dateSpan]]></fieldDescription>
     </field>
     <background>
         <band splitType="Stretch"/>
     </background>
-    <title>
-        <band height="10" splitType="Stretch"/>
-    </title>
-    <pageHeader>
-        <band height="10" splitType="Stretch"/>
-    </pageHeader>
-    <columnHeader>
-        <band height="10" splitType="Stretch"/>
-    </columnHeader>
-    <summary>
-        <band height="650" splitType="Stretch">
-            <lineChart>
-                <chart evaluationTime="Report">
-                    <reportElement x="0" y="0" width="950" height="650" uuid="182444f8-c2ca-4560-a413-6ab9b3b5673e">
-                        <property name="net.sf.jasperreports.customizer.class.0" value="net.sf.jasperreports.customizers.axis.RangeAxisCustomizer"/>
-                        <propertyExpression name="net.sf.jasperreports.customizer.0.minValue"><![CDATA[$P{min}]]></propertyExpression>
-                        <propertyExpression name="net.sf.jasperreports.customizer.0.maxValue"><![CDATA[$P{max}]]></propertyExpression>
-                    </reportElement>
-                    <chartTitle/>
-                    <chartSubtitle/>
-                    <chartLegend/>
-                </chart>
-                <categoryDataset>
-                    <dataset resetType="Report"/>
-                    <categorySeries>
-                        <seriesExpression><![CDATA[$F{code}]]></seriesExpression>
-                        <categoryExpression><![CDATA[$F{date}]]></categoryExpression>
-                        <valueExpression><![CDATA[$F{rate}]]></valueExpression>
-                    </categorySeries>
-                </categoryDataset>
-                <linePlot>
-                    <plot/>
-                    <categoryAxisFormat>
-                        <axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
-                    </categoryAxisFormat>
-                    <valueAxisFormat>
-                        <axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
-                    </valueAxisFormat>
-                </linePlot>
-            </lineChart>
+    <detail>
+        <band height="630" splitType="Stretch">
+            <property name="com.jaspersoft.studio.unit.height" value="px"/>
+            <subreport runToBottom="true">
+                <reportElement isPrintRepeatedValues="false" x="0" y="40" width="900" height="460" uuid="b0e761bf-fe02-4a0a-bafb-32d6831b7a13"/>
+                <subreportParameter name="min">
+                    <subreportParameterExpression><![CDATA[$F{min}.subtract(new BigDecimal("0.002"))]]></subreportParameterExpression>
+                </subreportParameter>
+                <subreportParameter name="max">
+                    <subreportParameterExpression><![CDATA[$F{max}.add(new BigDecimal("0.002"))]]></subreportParameterExpression>
+                </subreportParameter>
+                <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{rates})]]></dataSourceExpression>
+                <subreportExpression><![CDATA[$P{SUB_REPORT}]]></subreportExpression>
+            </subreport>
+            <textField>
+                <reportElement x="240" y="10" width="480" height="30" uuid="00b7bf5b-fe3d-4ece-a209-3bf40cf4ea12"/>
+                <textElement>
+                    <font fontName="Arial" size="16"/>
+                </textElement>
+                <textFieldExpression><![CDATA["NBRB "+ $F{currency} +" " +$F{dateSpan}+":"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="60" y="510" width="540" height="120" uuid="fd7c4494-6b12-4eaf-a4ba-8e34196eca2a"/>
+                <textElement>
+                    <font fontName="Arial" size="16"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Max: " + $F{max}+"\nMin: "+ $F{min} +"\nAverage " + $F{avg}]]></textFieldExpression>
+            </textField>
         </band>
-    </summary>
+    </detail>
 </jasperReport>

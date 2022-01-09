@@ -1,7 +1,7 @@
 docker run -e POSTGRES_USER=root -e POSTGRES_PASSWORD=root -e POSTGRES_DB=khmyl_app -p 5432:5432 library/postgres
 
 TODO: 
-weekly/monthly/quarter(last 7/14 days, last month, previous month...) reports in pdf (last 7/14 days, last month, previous month  (in diff formats?(PDF/csv email?  //add some interface for diff types???)
+weekly/monthly/quarter(last 7/14 days, last month, previous month... add callbacks support?) reports in pdf (last 7/14 days, last month, previous month (in diff formats?(PDF/csv email?  //add some interface for diff types???)
 add error command
 ALL NBRB currencies button
 add more bank rates(with exposed APIs)

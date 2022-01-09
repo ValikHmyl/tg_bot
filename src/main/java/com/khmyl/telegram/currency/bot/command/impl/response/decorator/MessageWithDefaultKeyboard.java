@@ -11,6 +11,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMar
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
+import static com.khmyl.telegram.currency.bot.command.Command.REPORT_COMMAND;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class MessageWithDefaultKeyboard extends SendMessage {
@@ -24,7 +26,7 @@ public class MessageWithDefaultKeyboard extends SendMessage {
    public ReplyKeyboard getReplyMarkup() {
       KeyboardRow row = new KeyboardRow();
       Currency.getCurrenciesForRate().forEach(currency -> row.add(KeyboardButton.builder().text(currency.getCode()).build()));
-      row.add(KeyboardButton.builder().text("WR").build());
+      row.add(KeyboardButton.builder().text(REPORT_COMMAND).build());
       return ReplyKeyboardMarkup.builder().keyboardRow(row).resizeKeyboard(true).build();
    }
 
