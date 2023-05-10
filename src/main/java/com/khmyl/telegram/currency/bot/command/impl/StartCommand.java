@@ -5,9 +5,9 @@ import com.khmyl.telegram.currency.bot.command.Response;
 import com.khmyl.telegram.currency.bot.command.impl.response.decorator.MessageWithDefaultKeyboard;
 import com.khmyl.telegram.currency.bot.command.impl.response.MessageResponse;
 import com.khmyl.telegram.currency.bot.converter.SubscriberConverter;
+import com.khmyl.telegram.currency.bot.kafka.KafkaSender;
 import com.khmyl.telegram.currency.bot.message.text.TextMessageProvider;
 import com.khmyl.telegram.currency.bot.model.dto.SubscriberDto;
-import com.khmyl.telegram.currency.bot.quartz.scheduler.SubscriberScheduler;
 import com.khmyl.telegram.currency.bot.service.subs.SubscriberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,18 +29,18 @@ public class StartCommand implements Command {
    private final Message message;
 
    @Autowired
-   private SubscriberScheduler subscriberScheduler;
-
-   @Autowired
    private SubscriberService subscriberService;
 
    @Autowired
    private TextMessageProvider textMessageProvider;
 
+   @Autowired
+   private KafkaSender kafkaSender;
+
    @Override
    public Response execute() {
       SubscriberDto subscriber = addNewSubscriber();
-      subscriberScheduler.scheduleRatesJob(subscriber);
+      kafkaSender.sendOnSubscribeMessage(subscriber);
       return getResponse(subscriber);
    }
 
