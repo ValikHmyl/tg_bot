@@ -11,6 +11,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -29,6 +30,7 @@ public class SubscriberServiceImpl implements SubscriberService {
 
    @Override
    @CachePut(cacheNames = CACHE_NAME, key = "#dto.id")
+   @Transactional
    public SubscriberDto add(SubscriberDto dto) {
       if (!subscriberRepository.existsById(dto.getId())) {
          Subscriber entity = SubscriberConverter.convert(dto);
@@ -52,6 +54,7 @@ public class SubscriberServiceImpl implements SubscriberService {
 
    @Override
    @CacheEvict(cacheNames = CACHE_NAME, key = "#id")
+   @Transactional
    public void remove(Long id) {
       if (Objects.nonNull(id)) {
          getById(id).ifPresent(sub -> {

@@ -1,20 +1,20 @@
 package com.khmyl.telegram.currency.bot.command.impl;
 
 import com.khmyl.telegram.currency.bot.command.impl.response.MessageResponse;
+import com.khmyl.telegram.currency.bot.kafka.KafkaSender;
 import com.khmyl.telegram.currency.bot.message.text.TextMessageProvider;
 import com.khmyl.telegram.currency.bot.model.dto.SubscriberDto;
-import com.khmyl.telegram.currency.bot.quartz.scheduler.SubscriberScheduler;
 import com.khmyl.telegram.currency.bot.service.subs.SubscriberService;
-import com.khmyl.telegram.currency.bot.util.BeanUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.User;
 
@@ -22,14 +22,15 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
 public class StartCommandTest {
 
+   @InjectMocks
    private StartCommand underTest;
 
    @MockBean
-   private SubscriberScheduler subscriberScheduler;
+   private KafkaSender kafkaSender;
 
    @MockBean
    private SubscriberService subscriberService;
@@ -43,31 +44,26 @@ public class StartCommandTest {
    @Mock
    private User user;
 
-   @Mock
-   private SubscriberDto subscriber;
-
-   @Autowired
-   private ApplicationContext applicationContext;
-
    @BeforeEach
    public void setup() {
       underTest = getStartCommand();
+      when(message.getFrom()).thenReturn(user);
+      MockitoAnnotations.initMocks(this);
    }
 
    @Test
    public void test() {
       when(textMessageProvider.getTextMessage(any(), any())).thenReturn("test");
-      when(message.getFrom()).thenReturn(user);
 
       MessageResponse response = (MessageResponse) underTest.execute();
 
       Assertions.assertNotNull(response);
       Assertions.assertNotNull(response.getMessage().getReplyMarkup());
       verify(subscriberService).add(any(SubscriberDto.class));
-      verify(subscriberScheduler).scheduleRatesJob(any(SubscriberDto.class));
+      verify(kafkaSender).sendOnSubscribeMessage(any(SubscriberDto.class));
    }
 
    private StartCommand getStartCommand() {
-      return BeanUtil.getBean(StartCommand.class, message);
+      return new StartCommand(message);
    }
 }

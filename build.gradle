@@ -45,6 +45,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'com.squareup.okhttp3:okhttp'
 	testImplementation 'com.squareup.okhttp3:mockwebserver'
+	testImplementation "org.testcontainers:testcontainers:1.18.1"
+	testImplementation "org.testcontainers:junit-jupiter:1.18.1"
+	testImplementation "org.testcontainers:postgresql:1.18.1"
 }
 
 test {
