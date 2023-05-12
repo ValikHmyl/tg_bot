@@ -12,16 +12,8 @@ public class SimpleTextMessageProvider implements TextMessageProvider {
    @Autowired
    private TemplateResolver templateResolver;
 
-   @Autowired
-   private MessageTemplateByKeyFactory messageTemplateFactory;
-
    @Override
-   public String getTextMessage(String messageKey, Object... args) {
-      return templateResolver.resolve(getTemplateByKey(messageKey, args));
+   public String getTextMessage(MessageTemplate messageTemplate) {
+      return templateResolver.resolve(messageTemplate);
    }
-
-   private MessageTemplate getTemplateByKey(String messageKey, Object... args) {
-      return messageTemplateFactory.getTemplate(messageKey, args);
-   }
-
 }

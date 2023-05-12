@@ -5,6 +5,7 @@ import com.khmyl.telegram.currency.bot.command.Response;
 import com.khmyl.telegram.currency.bot.command.impl.response.decorator.MessageWithDefaultKeyboard;
 import com.khmyl.telegram.currency.bot.command.impl.response.MessageResponse;
 import com.khmyl.telegram.currency.bot.message.text.TextMessageProvider;
+import com.khmyl.telegram.currency.bot.message.text.impl.template.GetRateMessageTemplate;
 import com.khmyl.telegram.currency.bot.model.dto.Currency;
 import com.khmyl.telegram.currency.bot.model.dto.ExchangeRate;
 import com.khmyl.telegram.currency.bot.service.currency.CurrencyRateService;
@@ -17,7 +18,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 import java.time.LocalDate;
 
-import static com.khmyl.telegram.currency.bot.message.text.TextMessageConstants.GET_RATE_COMMAND_MESSAGE_KEY;
 import static org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE;
 
 @Slf4j
@@ -41,7 +41,7 @@ public class GetRateCommand implements Command {
       ExchangeRate exchangeRate = currencyRateService.getRate(currency.getCode(), date);
       SendMessage message = MessageWithDefaultKeyboard.toBuilder()
                                                       .chatId(chatId.toString())
-                                                      .text(textMessageProvider.getTextMessage(GET_RATE_COMMAND_MESSAGE_KEY, exchangeRate))
+                                                      .text(textMessageProvider.getTextMessage(new GetRateMessageTemplate(exchangeRate)))
                                                       .build();
       return MessageResponse.of(message);
    }

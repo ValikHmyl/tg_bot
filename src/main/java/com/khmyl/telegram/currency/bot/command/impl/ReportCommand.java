@@ -5,6 +5,7 @@ import com.khmyl.telegram.currency.bot.command.Response;
 import com.khmyl.telegram.currency.bot.command.impl.response.DocumentResponse;
 import com.khmyl.telegram.currency.bot.message.text.TextMessageConstants;
 import com.khmyl.telegram.currency.bot.message.text.TextMessageProvider;
+import com.khmyl.telegram.currency.bot.message.text.impl.template.ReportCaptionTemplate;
 import com.khmyl.telegram.currency.bot.model.dto.Currency;
 import com.khmyl.telegram.currency.bot.model.dto.CurrencyRatesSummary;
 import com.khmyl.telegram.currency.bot.model.dto.LocalDateSpan;
@@ -80,7 +81,7 @@ public class ReportCommand implements Command {
       return DocumentResponse.of(SendDocument.builder()
                                              .chatId(message.getChatId().toString())
                                              .document(new InputFile(reportPath.toFile()))
-                                             .caption(messageProvider.getTextMessage(TextMessageConstants.REPORT_CAPTION_KEY))
+                                             .caption(messageProvider.getTextMessage(new ReportCaptionTemplate()))
                                              .build());
    }
 }

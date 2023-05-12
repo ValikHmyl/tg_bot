@@ -7,6 +7,7 @@ import com.khmyl.telegram.currency.bot.command.impl.response.MessageResponse;
 import com.khmyl.telegram.currency.bot.converter.SubscriberConverter;
 import com.khmyl.telegram.currency.bot.kafka.KafkaSender;
 import com.khmyl.telegram.currency.bot.message.text.TextMessageProvider;
+import com.khmyl.telegram.currency.bot.message.text.impl.template.StartMessageTemplate;
 import com.khmyl.telegram.currency.bot.model.dto.SubscriberDto;
 import com.khmyl.telegram.currency.bot.service.subs.SubscriberService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-import static com.khmyl.telegram.currency.bot.message.text.TextMessageConstants.START_COMMAND_MESSAGE_KEY;
 import static org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE;
 
 @Slf4j
@@ -51,11 +51,11 @@ public class StartCommand implements Command {
    }
 
    private Response getResponse(SubscriberDto subscriber) {
-      SendMessage message = MessageWithDefaultKeyboard.toBuilder()
+      SendMessage responseMessage = MessageWithDefaultKeyboard.toBuilder()
                                                       .chatId(subscriber.getChatId().toString())
-                                                      .text(textMessageProvider.getTextMessage(START_COMMAND_MESSAGE_KEY, subscriber))
+                                                      .text(textMessageProvider.getTextMessage(new StartMessageTemplate(subscriber)))
                                                       .build();
-      return MessageResponse.of(message);
+      return MessageResponse.of(responseMessage);
    }
 
 }

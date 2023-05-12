@@ -12,8 +12,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component(TextMessageConstants.REPORT_CAPTION_KEY)
-@Scope("prototype")
 @NoArgsConstructor
 public class ReportCaptionTemplate implements MessageTemplate {
 

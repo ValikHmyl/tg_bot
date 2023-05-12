@@ -20,8 +20,6 @@ import static com.khmyl.telegram.currency.bot.message.text.TextMessageConstants.
 import static com.khmyl.telegram.currency.bot.message.text.TextMessageConstants.TARGET_AMOUNT_KEY;
 import static com.khmyl.telegram.currency.bot.message.text.TextMessageConstants.TARGET_CURRENCY_KEY;
 
-@Component(TextMessageConstants.GET_RATE_COMMAND_MESSAGE_KEY)
-@Scope("prototype")
 @NoArgsConstructor
 @AllArgsConstructor
 public class GetRateMessageTemplate implements MessageTemplate {

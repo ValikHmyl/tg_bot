@@ -53,7 +53,7 @@ public class StartCommandTest {
 
    @Test
    public void test() {
-      when(textMessageProvider.getTextMessage(any(), any())).thenReturn("test");
+      when(textMessageProvider.getTextMessage(any())).thenReturn("test");
 
       MessageResponse response = (MessageResponse) underTest.execute();
 
