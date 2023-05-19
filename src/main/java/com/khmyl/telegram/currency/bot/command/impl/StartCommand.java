@@ -5,7 +5,7 @@ import com.khmyl.telegram.currency.bot.command.Response;
 import com.khmyl.telegram.currency.bot.command.impl.response.decorator.MessageWithDefaultKeyboard;
 import com.khmyl.telegram.currency.bot.command.impl.response.MessageResponse;
 import com.khmyl.telegram.currency.bot.converter.SubscriberConverter;
-import com.khmyl.telegram.currency.bot.kafka.KafkaSender;
+import com.khmyl.telegram.currency.bot.kafka.KafkaProducer;
 import com.khmyl.telegram.currency.bot.message.text.TextMessageProvider;
 import com.khmyl.telegram.currency.bot.message.text.impl.template.StartMessageTemplate;
 import com.khmyl.telegram.currency.bot.model.dto.SubscriberDto;
@@ -35,12 +35,12 @@ public class StartCommand implements Command {
    private TextMessageProvider textMessageProvider;
 
    @Autowired
-   private KafkaSender kafkaSender;
+   private KafkaProducer kafkaProducer;
 
    @Override
    public Response execute() {
       SubscriberDto subscriber = addNewSubscriber();
-      kafkaSender.sendOnSubscribeMessage(subscriber);
+      kafkaProducer.sendOnSubscribeMessage(subscriber);
       return getResponse(subscriber);
    }
 

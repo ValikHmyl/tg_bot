@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Component
 @Slf4j
-public class SubscriberListener {
+public class KafkaSubscriberListener {
 
    @Autowired
    private SubscriberScheduler subscriberScheduler;

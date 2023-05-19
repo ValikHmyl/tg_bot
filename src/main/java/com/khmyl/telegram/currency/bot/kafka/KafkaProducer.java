@@ -7,7 +7,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class KafkaSender {
+public class KafkaProducer {
 
    @Value(value = "${kafka.topic.subscriber.name}")
    private String subscriberTopic;

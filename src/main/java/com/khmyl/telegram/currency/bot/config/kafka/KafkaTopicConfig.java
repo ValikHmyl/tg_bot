@@ -10,9 +10,6 @@ import org.springframework.kafka.annotation.EnableKafka;
 @EnableKafka
 public class KafkaTopicConfig {
 
-   @Value(value = "${spring.kafka.bootstrap-servers}")
-   private String bootstrapAddress;
-
    @Value(value = "${kafka.topic.subscriber.name}")
    private String subscriberTopic;
 

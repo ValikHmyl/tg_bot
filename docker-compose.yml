@@ -20,8 +20,11 @@ services:
     container_name: bot-app     
     depends_on:
       - postgres
-      - kafka
-      - zookeeper
+      - kafka1
+      - kafka2
+      - zookeeper1
+      - zookeeper2
+      - zookeeper3
     environment:
       - JDBC_DATABASE_URL=jdbc:postgresql://postgres:5432/khmyl_app
       - JDBC_DATABASE_USERNAME=root
@@ -29,31 +32,70 @@ services:
       - BOT_TOKEN=${BOT_TOKEN}
     networks:
       - tgbot-network
-  zookeeper:
+  zookeeper1:
     image: confluentinc/cp-zookeeper:latest
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
     ports:
-      - 2181:2181
-    container_name: zookeeper
+      - 22181:2181
+    container_name: zookeeper1
     networks:
       - tgbot-network
-  kafka:
+  zookeeper2:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 32181:2181
+    container_name: zookeeper2
+    networks:
+      - tgbot-network
+  zookeeper3:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 42181:2181
+    container_name: zookeeper3
+    networks:
+      - tgbot-network
+  kafka1:
     image: confluentinc/cp-kafka:latest
     depends_on:
-      - zookeeper
+      - zookeeper1
+      - zookeeper2
+      - zookeeper3
     ports:
       - 29092:29092
-      - 9092:9092
     environment:
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://host.docker.internal:29092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka1:9092,DOCKER://host.docker.internal:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,DOCKER:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-    container_name: kafka
+    container_name: kafka1
+    networks:
+      - tgbot-network
+  kafka2:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper1
+      - zookeeper2
+      - zookeeper3
+    ports:
+      - 39092:39092
+    environment:
+      KAFKA_BROKER_ID: 2
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka2:9092,DOCKER://host.docker.internal:39092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,DOCKER:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    container_name: kafka2
     networks:
       - tgbot-network
 volumes:

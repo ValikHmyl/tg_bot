@@ -25,6 +25,9 @@ public class KafkaConsumerConfig {
       Map<String, Object> props = new HashMap<>();
       props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
       props.put(ConsumerConfig.GROUP_ID_CONFIG, "subs-group-1");
+      props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+      props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true");
+      props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");
       return new DefaultKafkaConsumerFactory<>(
               props,
               new StringDeserializer(),

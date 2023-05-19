@@ -32,7 +32,7 @@ public class SubscriberRepositoryTcTest {
            .withPassword("root");
 
    @DynamicPropertySource
-   static void registerMySQLProperties(DynamicPropertyRegistry registry) {
+   static void registerSQLProperties(DynamicPropertyRegistry registry) {
       registry.add("spring.datasource.url", postgres::getJdbcUrl);
       registry.add("spring.datasource.username", postgres::getUsername);
       registry.add("spring.datasource.password", postgres::getPassword);

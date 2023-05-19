@@ -1,7 +1,7 @@
 package com.khmyl.telegram.currency.bot.command.impl;
 
 import com.khmyl.telegram.currency.bot.command.impl.response.MessageResponse;
-import com.khmyl.telegram.currency.bot.kafka.KafkaSender;
+import com.khmyl.telegram.currency.bot.kafka.KafkaProducer;
 import com.khmyl.telegram.currency.bot.message.text.TextMessageProvider;
 import com.khmyl.telegram.currency.bot.model.dto.SubscriberDto;
 import com.khmyl.telegram.currency.bot.service.subs.SubscriberService;
@@ -30,7 +30,7 @@ public class StartCommandTest {
    private StartCommand underTest;
 
    @MockBean
-   private KafkaSender kafkaSender;
+   private KafkaProducer kafkaProducer;
 
    @MockBean
    private SubscriberService subscriberService;
@@ -60,7 +60,7 @@ public class StartCommandTest {
       Assertions.assertNotNull(response);
       Assertions.assertNotNull(response.getMessage().getReplyMarkup());
       verify(subscriberService).add(any(SubscriberDto.class));
-      verify(kafkaSender).sendOnSubscribeMessage(any(SubscriberDto.class));
+      verify(kafkaProducer).sendOnSubscribeMessage(any(SubscriberDto.class));
    }
 
    private StartCommand getStartCommand() {
