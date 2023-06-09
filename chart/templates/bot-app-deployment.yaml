@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+  creationTimestamp: null
+  labels:
+    app-name: bot-app
+  name: bot-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: bot-app
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+      creationTimestamp: null
+      labels:
+        tg-bot-tgbot-network: "true"
+        app-name: bot-app
+    spec:
+      containers:
+        - env:
+            - name: BOT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: bot-token
+                  key: token
+            - name: JDBC_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: password
+            - name: JDBC_DATABASE_URL
+              value: jdbc:postgresql://postgres:5432/khmyl_app
+            - name: JDBC_DATABASE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: username
+          image: bot-app:latest
+          imagePullPolicy: IfNotPresent
+#          imagePullPolicy: Never
+          name: bot-app
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            successThreshold: 2
+            failureThreshold: 2
+            initialDelaySeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            failureThreshold: 2
+            initialDelaySeconds: 20
+          ports:
+            - containerPort: 8080
+          resources: {}
+      restartPolicy: Always
+status: {}

@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  creationTimestamp: null
+  name: tg-bot-tgbot-network
+spec:
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              tg-bot-tgbot-network: "true"
+  podSelector:
+    matchLabels:
+      tg-bot-tgbot-network: "true"
