@@ -20,6 +20,8 @@ spec:
         tg-bot-tgbot-network: "true"
         app-name: zookeeper1
     spec:
+      securityContext:
+        runAsUser: 0
       containers:
         - env:
             - name: ZOOKEEPER_CLIENT_PORT
@@ -31,5 +33,18 @@ spec:
           ports:
             - containerPort: 2181
           resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/zookeeper/data
+              name: zookeeper-data
+            - mountPath: /var/lib/zookeeper/log
+              name: zookeeper-log
       restartPolicy: Always
+      volumes:
+        - name: zookeeper-data
+          persistentVolumeClaim:
+            claimName: zookeeper-data-pvc
+        - name: zookeeper-log
+          persistentVolumeClaim:
+            claimName: zookeeper-log-pvc
+
 status: {}

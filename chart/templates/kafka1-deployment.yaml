@@ -20,6 +20,8 @@ spec:
         tg-bot-tgbot-network: "true"
         app-name: kafka1
     spec:
+      securityContext:
+        runAsUser: 0 #?
       containers:
         - env:
             - name: KAFKA_ADVERTISED_LISTENERS
@@ -39,5 +41,12 @@ spec:
           ports:
             - containerPort: 29092
           resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/kafka/data
+              name: kafka-data
       restartPolicy: Always
+      volumes:
+        - name: kafka-data
+          persistentVolumeClaim:
+            claimName: kafka-pvc
 status: {}
