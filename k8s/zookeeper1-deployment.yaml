@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+  creationTimestamp: null
+  labels:
+    app-name: zookeeper1
+  name: zookeeper1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: zookeeper1
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+      creationTimestamp: null
+      labels:
+        tg-bot-tgbot-network: "true"
+        app-name: zookeeper1
+    spec:
+      containers:
+        - env:
+            - name: ZOOKEEPER_CLIENT_PORT
+              value: "2181"
+            - name: ZOOKEEPER_TICK_TIME
+              value: "2000"
+          image: confluentinc/cp-zookeeper:latest
+          name: zookeeper1
+          ports:
+            - containerPort: 2181
+          resources: {}
+      restartPolicy: Always
+status: {}

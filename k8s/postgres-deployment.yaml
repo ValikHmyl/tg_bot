@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+  creationTimestamp: null
+  labels:
+    app-name: postgres
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: postgres
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+      creationTimestamp: null
+      labels:
+        tg-bot-tgbot-network: "true"
+        app-name: postgres
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_DB
+              value: khmyl_app
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: password
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: username
+          image: postgres
+          name: postgres
+          ports:
+            - containerPort: 5432
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: db
+      restartPolicy: Always
+      volumes:
+        - name: db
+          persistentVolumeClaim:
+            claimName: db
+status: {}

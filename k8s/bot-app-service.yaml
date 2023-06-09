@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+  creationTimestamp: null
+  labels:
+    app-name: bot-app
+  name: bot-app
+spec:
+  type: NodePort
+  ports:
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
+  selector:
+    app-name: bot-app
+status:
+  loadBalancer: {}
