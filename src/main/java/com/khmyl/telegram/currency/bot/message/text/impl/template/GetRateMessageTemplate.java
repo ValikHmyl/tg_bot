@@ -2,11 +2,8 @@ package com.khmyl.telegram.currency.bot.message.text.impl.template;
 
 import com.khmyl.telegram.currency.bot.message.text.MessageTemplate;
 import com.khmyl.telegram.currency.bot.model.dto.ExchangeRate;
-import com.khmyl.telegram.currency.bot.message.text.TextMessageConstants;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -36,8 +33,7 @@ public class GetRateMessageTemplate implements MessageTemplate {
    }
 
    @Override
-   public String getMessage() {
-      //to properties and localize?
-      return "On {date_time} NBRB rate is <b>{target_amount} {target_currency} = {source_amount} {source_currency}</b>";
+   public String getMessageKey() {
+      return "message.get_rate.command";
    }
 }

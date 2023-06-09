@@ -30,6 +30,8 @@ services:
       - JDBC_DATABASE_USERNAME=root
       - JDBC_DATABASE_PASSWORD=root
       - BOT_TOKEN=${BOT_TOKEN}
+    ports:
+      - 8080:8080
     networks:
       - tgbot-network
   zookeeper1:

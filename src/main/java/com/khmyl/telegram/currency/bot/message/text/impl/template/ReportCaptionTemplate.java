@@ -21,7 +21,7 @@ public class ReportCaptionTemplate implements MessageTemplate {
    }
 
    @Override
-   public String getMessage() {
-      return "Weekly report of currencies rates";
+   public String getMessageKey() {
+      return "message.report.caption";
    }
 }

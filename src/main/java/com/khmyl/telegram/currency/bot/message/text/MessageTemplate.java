@@ -6,5 +6,5 @@ public interface MessageTemplate {
 
    Map<String, Object> getArgs();
 
-   String getMessage();
+   String getMessageKey();
 }

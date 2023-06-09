@@ -20,7 +20,7 @@ public class StartMessageTemplate implements MessageTemplate {
    }
 
    @Override
-   public String getMessage() {
-      return "Welcome {name}";
+   public String getMessageKey() {
+      return "message.start.command";
    }
 }

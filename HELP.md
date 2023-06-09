@@ -1,9 +1,10 @@
-docker run -e POSTGRES_USER=root -e POSTGRES_PASSWORD=root -e POSTGRES_DB=khmyl_app -p 5432:5432 library/postgres
+minikube images push(registry) https://minikube.sigs.k8s.io/docs/handbook/pushing/#1-pushing-directly-to-the-in-cluster-docker-daemon-docker-env
 
 TODO: 
 weekly/monthly/quarter(last 7/14 days, last month, previous month... add callbacks support?) reports in pdf (in diff formats?(PDF/csv email?  //add some interface for diff types???)
+rewrite commands(remove prototype, add args and parsing??)
 add error command
-localized commands
+localized command buttons
 kafka streams? (chose two currency ==send to topic and return output computed by kafka stream???)
 ALL NBRB currencies button
 add more bank rates(with exposed APIs)
