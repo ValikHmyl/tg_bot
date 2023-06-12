@@ -1,0 +1,4 @@
+bot_app:
+  image: bot-app
+  version: latest
+  name: bot-app

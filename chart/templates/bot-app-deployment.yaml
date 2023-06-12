@@ -4,13 +4,13 @@ metadata:
   annotations:
   creationTimestamp: null
   labels:
-    app-name: bot-app
-  name: bot-app
+    app-name: {{ .Values.bot_app.name }}
+  name: {{ .Values.bot_app.name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app-name: bot-app
+      app-name: {{ .Values.bot_app.name }}
   strategy: {}
   template:
     metadata:
@@ -18,7 +18,7 @@ spec:
       creationTimestamp: null
       labels:
         tg-bot-tgbot-network: "true"
-        app-name: bot-app
+        app-name: {{ .Values.bot_app.name }}
     spec:
       containers:
         - env:
@@ -39,10 +39,10 @@ spec:
                 secretKeyRef:
                   name: db-secret
                   key: username
-          image: bot-app:latest
+          image: {{ .Values.bot_app.image }}:{{.Values.bot_app.version}}
           imagePullPolicy: IfNotPresent
 #          imagePullPolicy: Never
-          name: bot-app
+          name: {{ .Values.bot_app.name }}
           readinessProbe:
             httpGet:
               path: /

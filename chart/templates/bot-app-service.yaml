@@ -4,8 +4,8 @@ metadata:
   annotations:
   creationTimestamp: null
   labels:
-    app-name: bot-app
-  name: bot-app
+    app-name: {{ .Values.bot_app.name }}
+  name: {{ .Values.bot_app.name }}
 spec:
   type: NodePort
   ports:
@@ -13,6 +13,6 @@ spec:
       port: 8080
       targetPort: 8080
   selector:
-    app-name: bot-app
+    app-name: {{ .Values.bot_app.name }}
 status:
   loadBalancer: {}
