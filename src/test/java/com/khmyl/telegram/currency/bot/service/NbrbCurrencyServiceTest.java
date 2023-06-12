@@ -3,7 +3,7 @@ package com.khmyl.telegram.currency.bot.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.khmyl.telegram.currency.bot.TestWithWebServer;
 import com.khmyl.telegram.currency.bot.model.dto.ExchangeRate;
-import com.khmyl.telegram.currency.bot.model.dto.NbrbExchangeRate;
+import com.khmyl.telegram.currency.bot.model.dto.nbrb.NbrbExchangeRate;
 import com.khmyl.telegram.currency.bot.service.currency.CurrencyRateService;
 import okhttp3.mockwebserver.MockResponse;
 import org.junit.jupiter.api.Assertions;

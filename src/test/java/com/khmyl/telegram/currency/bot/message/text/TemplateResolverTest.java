@@ -3,7 +3,7 @@ package com.khmyl.telegram.currency.bot.message.text;
 import com.khmyl.telegram.currency.bot.message.text.impl.TextMessageTemplateResolver;
 import com.khmyl.telegram.currency.bot.message.text.impl.template.GetRateMessageTemplate;
 import com.khmyl.telegram.currency.bot.message.text.impl.template.StartMessageTemplate;
-import com.khmyl.telegram.currency.bot.model.dto.NbrbExchangeRate;
+import com.khmyl.telegram.currency.bot.model.dto.nbrb.NbrbExchangeRate;
 import com.khmyl.telegram.currency.bot.model.dto.SubscriberDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

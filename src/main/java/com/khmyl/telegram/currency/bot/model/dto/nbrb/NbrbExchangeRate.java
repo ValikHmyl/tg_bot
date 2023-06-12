@@ -1,6 +1,7 @@
-package com.khmyl.telegram.currency.bot.model.dto;
+package com.khmyl.telegram.currency.bot.model.dto.nbrb;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.khmyl.telegram.currency.bot.model.dto.ExchangeRate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

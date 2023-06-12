@@ -7,7 +7,7 @@ add error command
 localized command buttons
 kafka streams? (chose two currency ==send to topic and return output computed by kafka stream???)
 ALL NBRB currencies button
-add more bank rates(with exposed APIs)
+add more bank rates(with exposed APIs)+-
 user settings to chose currencies and time of notifications, banks
 upd timezone dependent msg ???
 more text info in commands/responses+(info command?)

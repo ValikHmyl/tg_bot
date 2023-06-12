@@ -47,7 +47,7 @@ public class WebClientConfig {
 
       return WebClient.builder()
               .clientConnector(new ReactorClientHttpConnector(httpClient))
-              .baseUrl("www.nbrb.by/api/exrates")//todo
+//              .baseUrl("www.nbrb.by/api/exrates")//todo
               .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
               .build();
    }

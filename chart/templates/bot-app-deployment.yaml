@@ -27,6 +27,11 @@ spec:
                 secretKeyRef:
                   name: bot-token
                   key: token
+            - name: EXCHANGE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: exchange-api-key
+                  key: exchange-api-key
             - name: JDBC_DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:

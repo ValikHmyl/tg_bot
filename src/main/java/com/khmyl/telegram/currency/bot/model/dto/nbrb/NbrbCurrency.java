@@ -1,4 +1,4 @@
-package com.khmyl.telegram.currency.bot.model.dto;
+package com.khmyl.telegram.currency.bot.model.dto.nbrb;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

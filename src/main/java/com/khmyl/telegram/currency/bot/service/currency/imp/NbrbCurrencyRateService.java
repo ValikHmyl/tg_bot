@@ -2,8 +2,8 @@ package com.khmyl.telegram.currency.bot.service.currency.imp;
 
 import com.khmyl.telegram.currency.bot.model.dto.Currency;
 import com.khmyl.telegram.currency.bot.model.dto.ExchangeRate;
-import com.khmyl.telegram.currency.bot.model.dto.NbrbCurrency;
-import com.khmyl.telegram.currency.bot.model.dto.NbrbExchangeRate;
+import com.khmyl.telegram.currency.bot.model.dto.nbrb.NbrbCurrency;
+import com.khmyl.telegram.currency.bot.model.dto.nbrb.NbrbExchangeRate;
 import com.khmyl.telegram.currency.bot.service.currency.CurrencyRateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -28,7 +28,7 @@ public class NbrbCurrencyRateService implements CurrencyRateService {
    @Cacheable("rates")
    public ExchangeRate getRate(String code, LocalDate onDate) {
       return webClient.get()
-                      .uri(uriBuilder -> uriBuilder.path("/rates/{code}")
+                      .uri(uriBuilder -> uriBuilder.path("www.nbrb.by/api/exrates/rates/{code}")
                                                    .queryParam("parammode", "2")
                                                    .queryParam("ondate", onDate)
                                                    .build(code))
@@ -51,7 +51,7 @@ public class NbrbCurrencyRateService implements CurrencyRateService {
 
    private List<NbrbExchangeRate> getRates(Long currencyId, LocalDate startDate, LocalDate endDate) {
       return webClient.get()
-                      .uri(uriBuilder -> uriBuilder.path("/rates/dynamics/{cur_id}")
+                      .uri(uriBuilder -> uriBuilder.path("www.nbrb.by/api/exrates/rates/dynamics/{cur_id}")
                                                    .queryParam("startdate", startDate)
                                                    .queryParam("enddate", endDate)
                                                    .build(currencyId))
@@ -63,7 +63,7 @@ public class NbrbCurrencyRateService implements CurrencyRateService {
 
    private List<Long> getEffectiveCurrencyIds(Currency currency, LocalDate startDate, LocalDate endDate) {
       List<NbrbCurrency> allCurrencies = webClient.get()
-                                                  .uri(uriBuilder -> uriBuilder.path("/currencies").build())
+                                                  .uri(uriBuilder -> uriBuilder.path("www.nbrb.by/api/exrates/currencies").build())
                                                   .retrieve()
                                                   .bodyToMono(new ParameterizedTypeReference<List<NbrbCurrency>>() {
                                                   })
